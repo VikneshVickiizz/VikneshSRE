@@ -10,14 +10,21 @@ pipeline {
             cleanWS()
             }
     }
-  }
+  
    stage("Checkout from SCM"){
            steps {
            git branch: 'master', credentialsId: 'github' , url: 'https://github.com/VikneshVickiizz/VikneshSRE'
            }
+   }
    stage("Build Application"){
            steps {
            sh "mvn clean package"
            }
    }
+  stage("Test Application"){
+           steps {
+           sh "mvn test"
+           }
+  }
+}
 }
